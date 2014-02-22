@@ -4,6 +4,7 @@ using System.Collections;
 public class Pillar : MonoBehaviour {
 
 	public bool passed;
+	public static bool justStartedOver;
 	GameObject nextPillar;
 	GameObject pig;
 	float spinSpeed;
@@ -11,6 +12,7 @@ public class Pillar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		passed = false;
+		justStartedOver = false;
 		pig = GameObject.FindGameObjectWithTag("Pig");
 		spinSpeed = Random.Range(-180, 180);
 	}

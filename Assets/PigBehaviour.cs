@@ -9,7 +9,12 @@ public class PigBehaviour : MonoBehaviour {
 	enum Facing {Left, Right}
 	Facing facing = Facing.Right;
 
-	float gravityBoost = 100000.0f;
+	float gravityBoost = 2000.0f;
+	float jumpForceBoost = 1.0f;
+
+	Vector3 jumpRightVector = new Vector3(3000, 7500, 0);
+	Vector3 jumpLeftVector = new Vector3(-3000, 7500, 0);
+	Vector3 down = new Vector3(0, -1, 0);
 
 	// Use this for initialization
 	void Start () {
@@ -24,15 +29,15 @@ public class PigBehaviour : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
-		rigidbody.AddForce(gravityBoost * Time.deltaTime * new Vector3(0, -1, 0));
+		rigidbody.AddForce(gravityBoost * down);
 
 		if (Input.touchCount > 0) {
 
 			if (Input.GetTouch(0).position.x > Screen.width/2) {
 
-				rigidbody.AddForce(new Vector3(3000, 7500, 0));
+				rigidbody.AddForce(jumpForceBoost * jumpRightVector);
 
 				if (facing == Facing.Left) {
 					transform.localScale = 
@@ -52,7 +57,7 @@ public class PigBehaviour : MonoBehaviour {
 
 			} else { 
 
-				rigidbody.AddForce(new Vector3(-4000, 6000, 0));
+				rigidbody.AddForce(jumpForceBoost * jumpLeftVector);
 
 				if (facing == Facing.Right) {
 					transform.localScale = 
